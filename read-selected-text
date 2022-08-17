@@ -1,0 +1,20 @@
+#! /bin/bash
+
+espeak_pid=$(pidof espeak)
+
+# espeak argument reference:
+# -a for volume. Max 200
+# -p for pitch.  0 to 99, default is 50
+# -v for voice
+
+if [ -z "$espeak_pid"]
+then
+    xclip -out -selection primary | xclip -in -selection clipboard
+    text=`xsel --clipboard | tr "\n" " "`
+    #text=`xsel --clipboard | tr "\n" " "`
+    #spd-say --wait (echo $PATH)
+    say (echo $PATH)
+    echo $text
+else 
+    kill $espeak_pid
+fi
